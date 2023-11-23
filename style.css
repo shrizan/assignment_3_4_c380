@@ -44,6 +44,19 @@ input {
   padding: 20px;
 }
 
+.title {
+  font-size: 2.5rem;
+}
+
+.dot {
+  color: cyan;
+  font-size: 3rem;
+}
+
+.sub-title {
+  font-size: 1.7rem;
+}
+
 /* currency outer sytle */
 .currency--outer {
   display: flex;
