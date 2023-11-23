@@ -15,49 +15,54 @@
 
 <body>
   <div>
-    <div class="info-div">
-      <h1>US Dollar to Canadian Dollar</h1>
-      <p>Convert <strong>USD</strong> to <strong>CAD</strong> at the real exchange rate</p>
-    </div>
+    <div class="outer--div">
+      <div class="info-div">
+        <h1>US Dollar to Canadian Dollar</h1>
+        <p>Convert <strong>USD</strong> to <strong>CAD</strong> at the real exchange rate</p>
+      </div>
 
-    <div class="currency--outer">
+      <div class="currency--outer">
+        <div></div>
+        <!-- first currency pary -->
+        <div>
+          <div class="currency--wrapper">
+            <div class="currency__input">
+              <p>Amount</p>
+              <input id="currencyUSD" type="number" />
+            </div>
+            <div class="currency__label">
+              🇺🇲 &nbsp;USD
+            </div>
+          </div>
 
-      <!-- first currency pary -->
-      <div>
+          <p class="error" id="usdError"></p>
+        </div>
+        <div class="exchange--icon-wrapper">
+          <img src="exchange.png" alt="exchange icon" class="exchange__icon">
+        </div>
+
+        <!-- first currency pary -->
         <div class="currency--wrapper">
           <div class="currency__input">
-            <p>Amount</p>
-            <input id="currencyUSD" type="number" />
+            <p>Convert To</p>
+            <input id="currencyCAD" readonly />
           </div>
           <div class="currency__label">
-            🇺🇲 &nbsp;USD
+            🇨🇦 &nbsp; CAD
           </div>
         </div>
 
-        <p class="error" id="usdError"></p>
+
+        <div></div>
       </div>
-      <div class="exchange--icon-wrapper">
-        <img src="exchange.png" alt="exchange icon" class="exchange__icon">
-      </div>
-
-      <!-- first currency pary -->
-      <div class="currency--wrapper">
-        <div class="currency__input">
-          <p>Convert To</p>
-          <input id="currencyCAD" readonly />
-        </div>
-        <div class="currency__label">
-          🇨🇦 &nbsp; CAD
-        </div>
-      </div>
-
-
-
     </div>
-
     <!-- CONVERT BUTTON -->
     <div class="convert--wrapper">
-      <button class="convert__button" id="convertButton">Convert</button>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div style="text-align: end;"><button class="convert__button" id="convertButton">Convert</button></div>
+      <div></div>
     </div>
 
 
