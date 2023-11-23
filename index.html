@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div>
+    <div class="info-div">
+      <h1>US Dollar to Canadian Dollar</h1>
+      <p>Convert <strong>USD</strong> to <strong>CAD</strong> at the real exchange rate</p>
+    </div>
+
+    <div class="currency--outer">
+
+      <!-- first currency pary -->
+      <div>
+        <div class="currency--wrapper">
+          <div class="currency__input">
+            <p>Amount</p>
+            <input id="currencyUSD" type="number" />
+          </div>
+          <div class="currency__label">
+            🇺🇲 &nbsp;USD
+          </div>
+        </div>
+
+        <p class="error" id="usdError"></p>
+      </div>
+      <div class="exchange--icon-wrapper">
+        <img src="exchange.png" alt="exchange icon" class="exchange__icon">
+      </div>
+
+      <!-- first currency pary -->
+      <div class="currency--wrapper">
+        <div class="currency__input">
+          <p>Convert To</p>
+          <input id="currencyCAD" readonly />
+        </div>
+        <div class="currency__label">
+          🇨🇦 &nbsp; CAD
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <!-- CONVERT BUTTON -->
+    <div class="convert--wrapper">
+      <button class="convert__button" id="convertButton">Convert</button>
+    </div>
+
+
+  </div>
+  <script>
+
+    const colorBorder = "#a49f9f";
+
+    const currencyUSD = document.getElementById("currencyUSD");
+    const currencyCAD = document.getElementById("currencyCAD");
+    const usdError = document.getElementById("usdError");
+    const convertButton = document.getElementById("convertButton");
+
+    const onUSDChange = function () {
+      currencyCAD.value = null;
+      if (!event.target.value || event.target.value === "") {
+        currencyUSD.style.borderColor = "red";
+        usdError.innerHTML = 'This field required!!!';
+      }
+      else {
+
+        currencyUSD.style.borderColor = colorBorder;
+        usdError.innerHTML = '';
+      }
+    }
+
+    const addEventToUSD = function () {
+      currencyUSD.addEventListener("change", onUSDChange, false);
+      currencyUSD.addEventListener("keyup", onUSDChange, false);
+      currencyUSD.addEventListener("focus", onUSDChange, false);
+    }
+
+    const onConvertButtonClick = function () {
+      convertButton.addEventListener("click", function () {
+        if (currencyUSD.value) {
+          currencyCAD.value = (parseFloat(currencyUSD.value) * 1.33).toFixed(3);
+        }
+        else {
+          alert("Please provide USD amount to convert!!!")
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      addEventToUSD();
+      onConvertButtonClick();
+    });
+  </script>
+</body>
+
+</html>
