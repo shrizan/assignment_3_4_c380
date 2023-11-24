@@ -20,7 +20,7 @@ const resetSecondInput = function () {
 // when usd change by user logic is implemented here
 const onUSDChange = function () {
   secondCurrency.value = null;
-  if (!event.target.value || event.target.value === "") {
+  if (!firstCurrency.value || firstCurrency.value === "") {
     firstCurrency.style.borderColor = errorColor;
     usdError.innerHTML = requiredFieldMsg;
   }
