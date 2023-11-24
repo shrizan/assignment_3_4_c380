@@ -34,11 +34,15 @@
         <div>
           <div class="currency--wrapper">
             <div class="currency__input">
-              <label for="currencyUSD">Amount</label>
-              <input id="currencyUSD" type="number" />
+              <label for="firstCurrency">Amount</label>
+              <input id="firstCurrency" type="number" />
             </div>
             <div class="currency__label">
-              🇺🇲 &nbsp;USD
+              <select id="firstCurrencyType">
+                <option value="usd" selected>🇺🇲 &nbsp;USD</option>
+                <option value="cad">🇨🇦 &nbsp; CAD</option>
+              </select>
+
             </div>
           </div>
 
@@ -57,10 +61,14 @@
         <div class="currency--wrapper">
           <div class="currency__input">
             <label>Convert To</label>
-            <input id="currencyCAD" readonly />
+            <input id="secondCurrency" readonly />
           </div>
           <div class="currency__label">
-            🇨🇦 &nbsp; CAD
+            <select id="secondCurrencyType">
+              <option value="cad" selected>🇨🇦 &nbsp; CAD</option>
+              <option value="usd">🇺🇲 &nbsp;USD</option>
+            </select>
+
           </div>
         </div>
         <!-- end of second currency part -->
@@ -91,37 +99,57 @@
     const provideUSDValueMsg = "Please provide USD amount to convert!!!";
 
     // getting element of DOM for manipulation and processing
-    const currencyUSD = document.getElementById("currencyUSD");
-    const currencyCAD = document.getElementById("currencyCAD");
+    const firstCurrency = document.getElementById("firstCurrency");
+    const firstCurrencyType = document.getElementById("firstCurrencyType");
+    const secondCurrency = document.getElementById("secondCurrency");
+    const secondCurrencyType = document.getElementById("secondCurrencyType");
     const usdError = document.getElementById("usdError");
     const convertButton = document.getElementById("convertButton");
 
     // when usd change by user logic is implemented here
     const onUSDChange = function () {
-      currencyCAD.value = null;
+      secondCurrency.value = null;
       if (!event.target.value || event.target.value === "") {
-        currencyUSD.style.borderColor = errorColor;
+        firstCurrency.style.borderColor = errorColor;
         usdError.innerHTML = requiredFieldMsg;
       }
       else {
 
-        currencyUSD.style.borderColor = colorBorder;
+        firstCurrency.style.borderColor = colorBorder;
         usdError.innerHTML = '';
       }
     }
 
     // adding change, keyup and focus events to usd input field 
     const addEventToUSD = function () {
-      currencyUSD.addEventListener("change", onUSDChange, false);
-      currencyUSD.addEventListener("keyup", onUSDChange, false);
-      currencyUSD.addEventListener("focus", onUSDChange, false);
+      firstCurrency.addEventListener("change", onUSDChange, false);
+      firstCurrency.addEventListener("keyup", onUSDChange, false);
+      firstCurrency.addEventListener("focus", onUSDChange, false);
+    }
+
+    const convertUSDToCAD = function (usdValue) {
+      return (usdValue * 1.33).toFixed(3);
+    }
+
+    const convertCADToUSD = function (cadValue) {
+      return (cadValue / 1.33).toFixed(3);
     }
 
     // adding event listener for convert click button and implementing currency conversion logic
     const onConvertButtonClick = function () {
       convertButton.addEventListener("click", function () {
-        if (currencyUSD.value) {
-          currencyCAD.value = (parseFloat(currencyUSD.value) * 1.33).toFixed(3);
+        if (firstCurrency.value) {
+          if (firstCurrencyType.value === secondCurrencyType.value) {
+            secondCurrency.value = firstCurrency.value;
+          }
+          else {
+            if (secondCurrencyType.value === "cad") {
+              secondCurrency.value = convertUSDToCAD(parseFloat(firstCurrency.value));
+            }
+            else {
+              secondCurrency.value = convertCADToUSD(parseFloat(firstCurrency.value));
+            }
+          }
         }
         else {
           alert(provideUSDValueMsg)
